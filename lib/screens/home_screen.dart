@@ -6,12 +6,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Cupertino App'),
-      ),
+      navigationBar: const CupertinoNavigationBar(middle: Text('Guess a Flag')),
       child: Center(
         child: CupertinoButton(
-          child: const Text("Go to Settings"),
+          child: const Text("Start Game"),
           onPressed: () {
             Navigator.pushNamed(context, '/settings');
           },
