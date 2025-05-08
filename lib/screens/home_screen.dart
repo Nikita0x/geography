@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         child: CupertinoButton(
           child: const Text("Start Game"),
           onPressed: () {
-            Navigator.pushNamed(context, '/settings');
+            Navigator.pushNamed(context, '/modes');
           },
         ),
       ),
