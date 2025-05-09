@@ -8,11 +8,22 @@ class HomeScreen extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(middle: Text('Guess a Flag')),
       child: Center(
-        child: CupertinoButton(
-          child: const Text("Start Game"),
-          onPressed: () {
-            Navigator.pushNamed(context, '/modes');
-          },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CupertinoButton(
+              child: const Text("Start Game"),
+              onPressed: () {
+                Navigator.pushNamed(context, '/modes');
+              },
+            ),
+            CupertinoButton(
+              child: const Text("Playground"),
+              onPressed: () {
+                Navigator.pushNamed(context, '/playground');
+              },
+            ),
+          ],
         ),
       ),
     );

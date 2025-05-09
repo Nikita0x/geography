@@ -4,31 +4,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geography/models/quiz_round.dart';
 import 'dart:math';
 import 'dart:async';
+import 'package:geography/data/countries.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+class FlagsEuropeScreen extends StatefulWidget {
+  const FlagsEuropeScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  State<FlagsEuropeScreen> createState() => _FlagsEuropeScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  int duration = 30;
+class _FlagsEuropeScreenState extends State<FlagsEuropeScreen> {
+  int duration = 60;
   Timer? countDownTimer;
 
   late QuizRound currentRound;
-  final List<String> availableCountryCodes = [
-    'de',
-    'ua',
-    'es',
-    'fr',
-    'it',
-    'pl',
-  ]; // Add more country codes as necessary
+
   int correctGuesses = 0;
 
   void handleAnswer(String countryCode) {
-    if (countryCode == currentRound.correctCountryCode) {
+    if (countryCode == currentRound.correctCountry.code) {
       setState(() {
         correctGuesses++;
       });
@@ -43,32 +37,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void generateNewRound() {
-    // Randomly pick a correct country
     final random = Random();
-    final correctCountryCode =
-        availableCountryCodes[random.nextInt(availableCountryCodes.length)];
 
-    // Pick 3 incorrect flags
-    List<String> incorrectFlags = List.from(availableCountryCodes)
-      ..remove(correctCountryCode); // Remove the correct one from the list
+    final correctCountry =
+        europeanCountries[random.nextInt(europeanCountries.length)];
 
-    incorrectFlags.shuffle(random); // Shuffle the list of incorrect options
-    incorrectFlags = incorrectFlags.take(3).toList(); // Take the first 3
+    final incorrectCountries =
+        (List<Country>.from(europeanCountries)
+              ..remove(correctCountry)
+              ..shuffle(random))
+            .take(3)
+            .toList();
 
-    // Now combine the correct flag with the 3 incorrect ones
-    List<String> allFlags = [correctCountryCode, ...incorrectFlags];
+    final allOptions = [correctCountry, ...incorrectCountries]..shuffle(random);
 
-    // Shuffle the combined list of 4 flags
-    allFlags.shuffle(random);
-
-    // Create the new QuizRound with shuffled options
     setState(() {
       currentRound = QuizRound(
-        correctCountryCode: correctCountryCode,
-        options:
-            allFlags
-                .map((code) => FlagOption(code))
-                .toList(), // Convert country codes to FlagOption objects
+        correctCountry: correctCountry, // Passing the code instead of object
+        options: allOptions,
       );
     });
   }
@@ -107,9 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Select a flag'),
-      ),
+      navigationBar: const CupertinoNavigationBar(middle: Text('Europe')),
       child: SafeArea(
         child:
             duration == 0
@@ -142,21 +126,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           mainAxisSpacing: 5,
                           padding: EdgeInsets.all(5),
                           children:
-                              currentRound.options.map((flagOption) {
+                              currentRound.options.map((item) {
                                 return Container(
                                   color: Colors.black,
                                   child: CupertinoButton(
-                                    child: SvgPicture.asset(
-                                      flagOption.assetPath,
-                                    ),
-                                    onPressed:
-                                        () => handleAnswer(flagOption.code),
+                                    child: SvgPicture.asset(item.svgPath),
+                                    onPressed: () => handleAnswer(item.code),
                                   ),
                                 );
                               }).toList(),
                         ),
                       ),
-                      Text("Select: ${currentRound.correctCountryCode}"),
+                      Text(currentRound.correctCountry.name),
                       Text("Correct Guesses: $correctGuesses"),
                       Text("Duration: $duration"),
                     ],

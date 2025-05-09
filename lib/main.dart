@@ -3,11 +3,13 @@ import 'package:device_preview/device_preview.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/modes_screen.dart';
-import 'screens/flags_screen.dart';
+import 'screens/flags_europe_screen.dart';
+import 'screens/playground_screen.dart';
 
 class Routes {
-  static const String settings = '/flags';
+  static const String europeanFlags = '/flags/eu';
   static const String modes = '/modes';
+  static const String playground = '/playground';
 }
 
 void main() {
@@ -18,8 +20,9 @@ void main() {
             useInheritedMediaQuery: true, //required by DevicePreview
             home: HomeScreen(),
             routes: {
-              Routes.settings: (context) => SettingsScreen(),
+              Routes.europeanFlags: (context) => FlagsEuropeScreen(),
               Routes.modes: (context) => ModesScreen(),
+              Routes.playground: (context) => PlaygroundScreen(),
             },
           ),
     ),

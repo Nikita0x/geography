@@ -2,10 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
+class Mode {
+  final String name;
+  final String route;
+
+  Mode(this.name, this.route);
+}
+
 class ModesScreen extends StatelessWidget {
   ModesScreen({super.key});
 
-  List modes = ['Europe'];
+  List<Mode> modes = [Mode('Europe', '/flags/eu')];
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +30,18 @@ class ModesScreen extends StatelessWidget {
                   mainAxisSpacing: 5,
                   padding: EdgeInsets.all(5),
                   children:
-                      modes.map((flagOption) {
+                      modes.map((item) {
                         return Container(
                           color: Colors.blue,
                           child: CupertinoButton(
                             child: Text(
-                              'Europe',
+                              item.name,
                               style: TextStyle(color: Colors.black),
                             ),
                             onPressed:
-                                () => {Navigator.pushNamed(context, '/flags')},
+                                () => {
+                                  Navigator.pushNamed(context, item.route),
+                                },
                           ),
                         );
                       }).toList(),

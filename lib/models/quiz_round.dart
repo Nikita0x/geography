@@ -1,13 +1,8 @@
-class FlagOption {
-  final String code; // e.g. 'de'
-  final String assetPath; // e.g. 'assets/flags/de.svg'
-
-  FlagOption(this.code) : assetPath = 'assets/flags/$code.svg';
-}
+import 'package:geography/data/countries.dart';
 
 class QuizRound {
-  final String correctCountryCode;
-  final List<FlagOption> options;
+  final Country correctCountry;
+  final List<Country> options;
 
-  QuizRound({required this.correctCountryCode, required this.options});
+  QuizRound({required this.correctCountry, required this.options});
 }
