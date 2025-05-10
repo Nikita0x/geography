@@ -12,22 +12,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _audioService = AudioService();
+  // final _audioService = AudioService();
 
-  @override
-  void initState() {
-    if (!kIsWeb) {
-      _audioService.playBackgroundMusic();
-    }
+  // @override
+  // void initState() {
+  //   if (!kIsWeb) {
+  //     _audioService.playBackgroundMusic();
+  //   }
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    _audioService.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _audioService.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,31 +37,31 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CupertinoButton(
-              child: Text('pause music'),
-              onPressed: () {
-                _audioService.pauseMusic();
-              },
-            ),
-            CupertinoButton(
-              child: Text('resume music'),
-              onPressed: () {
-                _audioService.resumeMusic();
-              },
-            ),
-            CupertinoButton(
-              child: Text('stop music'),
-              onPressed: () {
-                _audioService.stop();
-              },
-            ),
+            // CupertinoButton(
+            //   child: Text('pause music'),
+            //   onPressed: () {
+            //     // _audioService.pauseMusic();
+            //   },
+            // ),
+            // CupertinoButton(
+            //   child: Text('resume music'),
+            //   onPressed: () {
+            //     // _audioService.resumeMusic();
+            //   },
+            // ),
+            // CupertinoButton(
+            //   child: Text('stop music'),
+            //   onPressed: () {
+            //     // _audioService.stop();
+            //   },
+            // ),
             CupertinoButton(
               child: const Text("Start Game"),
               onPressed: () async {
                 Navigator.pushNamed(context, '/modes');
-                if (!_audioService.isAlreadyPlaying) {
-                  await _audioService.playBackgroundMusic();
-                }
+                // if (!_audioService.isAlreadyPlaying) {
+                //   await _audioService.playBackgroundMusic();
+                // }
               },
             ),
             CupertinoButton(

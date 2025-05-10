@@ -15,14 +15,24 @@ class FlagsEuropeScreen extends StatefulWidget {
 
 class _FlagsEuropeScreenState extends State<FlagsEuropeScreen> {
   int duration = 60;
+
   Timer? countDownTimer;
+  bool _timerPaused = false;
+  final int _remainingPauseTime = 0; // Stores remaining pause duration
+
+  String userAnswer = '';
+  bool disableButtons = false;
 
   late QuizRound currentRound;
 
   int correctGuesses = 0;
 
-  void handleAnswer(String countryCode) {
-    if (countryCode == currentRound.correctCountry.code) {
+  void handleAnswer(String countryCode) async {
+    userAnswer = countryCode;
+    disableButtons = true;
+    pauseTimer();
+
+    if (userAnswer == currentRound.correctCountry.code) {
       setState(() {
         correctGuesses++;
       });
@@ -32,8 +42,12 @@ class _FlagsEuropeScreenState extends State<FlagsEuropeScreen> {
       });
     }
 
-    // After answering, load next round (you’ll add logic later)
-    generateNewRound();
+    await Future.delayed(Duration(milliseconds: 1800), () {
+      generateNewRound();
+      userAnswer = '';
+      disableButtons = false;
+      resumeTimer();
+    });
   }
 
   void generateNewRound() {
@@ -61,20 +75,49 @@ class _FlagsEuropeScreenState extends State<FlagsEuropeScreen> {
 
   void startTimer() {
     countDownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
+      if (!mounted || _timerPaused) {
+        return; // Skip tick when paused
       }
 
-      if (duration == 0) {
+      if (duration <= 0) {
         timer.cancel();
       } else {
-        setState(() {
-          duration--;
-        });
-        print('tick timer');
+        setState(() => duration--);
       }
     });
+  }
+
+  void pauseTimer() {
+    if (!_timerPaused) {
+      _timerPaused = true;
+      countDownTimer?.cancel();
+    }
+  }
+
+  void resumeTimer() {
+    if (_timerPaused) {
+      _timerPaused = false;
+      startTimer(); // Restart with remaining duration
+    }
+  }
+
+  Color? getColorButton(String countryCode) {
+    if (disableButtons) {
+      // If user selected this country and it's correct
+      if (userAnswer == countryCode &&
+          countryCode == currentRound.correctCountry.code) {
+        return Colors.green;
+      }
+      // If this is the correct country (highlight for reference)
+      else if (countryCode == currentRound.correctCountry.code) {
+        return Colors.green;
+      }
+      // If user selected this country and it's wrong
+      else if (userAnswer == countryCode) {
+        return Colors.red;
+      }
+    }
+    return null; // Default color when not disabled or not relevant
   }
 
   @override
@@ -127,19 +170,37 @@ class _FlagsEuropeScreenState extends State<FlagsEuropeScreen> {
                           padding: EdgeInsets.all(5),
                           children:
                               currentRound.options.map((item) {
-                                return Container(
-                                  color: Colors.black,
+                                return Card(
+                                  elevation: 5,
                                   child: CupertinoButton(
-                                    child: SvgPicture.asset(item.svgPath),
-                                    onPressed: () => handleAnswer(item.code),
+                                    color: getColorButton(item.code),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: SvgPicture.asset(
+                                        item.svgPath,
+                                        height: 110,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      if (!disableButtons) {
+                                        handleAnswer(item.code);
+                                      }
+                                    },
                                   ),
                                 );
                               }).toList(),
                         ),
                       ),
-                      Text(currentRound.correctCountry.name),
+                      Text(
+                        currentRound.correctCountry.name,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       Text("Correct Guesses: $correctGuesses"),
                       Text("Duration: $duration"),
+                      Text("Answered?: $userAnswer"),
                     ],
                   ),
                 ),

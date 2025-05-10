@@ -31,17 +31,12 @@ class ModesScreen extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   children:
                       modes.map((item) {
-                        return Container(
-                          color: Colors.blue,
+                        return Card(
+                          elevation: 5,
                           child: CupertinoButton(
-                            child: Text(
-                              item.name,
-                              style: TextStyle(color: Colors.black),
-                            ),
+                            child: Text(item.name),
                             onPressed:
-                                () => {
-                                  Navigator.pushNamed(context, item.route),
-                                },
+                                () => Navigator.pushNamed(context, item.route),
                           ),
                         );
                       }).toList(),
