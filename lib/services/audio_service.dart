@@ -11,6 +11,7 @@ class MyAudioButton extends StatefulWidget {
 class _MyAudioButtonState extends State<MyAudioButton> {
   final AudioPlayer _player = AudioPlayer();
   bool _isPlaying = false;
+  double _volume = 0;
 
   Future<void> _playSound() async {
     try {
@@ -20,8 +21,9 @@ class _MyAudioButtonState extends State<MyAudioButton> {
         return;
       }
 
-      await _player.setAsset('assets/sounds/theme.mp3'); // Load audio
-      await _player.play(); // Play after loading
+      await _player.setAsset('assets/sounds/theme.mp3');
+      await _player.play();
+
       setState(() => _isPlaying = true);
 
       // Update state when playback completes
@@ -39,6 +41,12 @@ class _MyAudioButtonState extends State<MyAudioButton> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _volume = _player.volume;
+  }
+
+  @override
   void dispose() {
     _player.dispose();
     super.dispose();
@@ -48,7 +56,23 @@ class _MyAudioButtonState extends State<MyAudioButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: _playSound,
-      child: Text(_isPlaying ? 'Stop Sound' : 'Play Sound'),
+      // onPressed: () {},
+      child: Column(
+        children: [
+          Text(_isPlaying ? 'Stop Sound' : 'Play Sound'),
+          Text('Duration: ${_player.duration}'),
+          Slider(
+            value: _volume,
+            onChanged: (value) async {
+              setState(() {
+                _volume = value;
+              });
+              await _player.setVolume(value);
+              print('Volume set to: $value');
+            },
+          ),
+        ],
+      ),
     );
   }
 }
