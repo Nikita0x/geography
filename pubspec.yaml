@@ -38,6 +38,9 @@ dependencies:
     flutter_svg: ^2.1.0
     just_audio: ^0.10.2
     just_audio_media_kit: ^2.1.0
+    #TODO: разобраться почему ниже не работет (нельзя проиграть музыку на линукс)
+    # media_kit_libs_linux: 1.2.1
+    universal_io: ^2.2.2
 
 dev_dependencies:
     flutter_test:

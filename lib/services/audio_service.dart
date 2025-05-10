@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:universal_io/io.dart';
 
 class MyAudioButton extends StatefulWidget {
   const MyAudioButton({super.key});
@@ -40,6 +41,17 @@ class _MyAudioButtonState extends State<MyAudioButton> {
     }
   }
 
+  Future<void> setupAudio() async {
+    // if (Platform.isLinux) {
+    //   debugPrint("Linux. Sound is not available temporarily.");
+    //   return;
+    // }
+
+    await _player.setAsset('assets/sounds/theme.mp3');
+    await _player.setLoopMode(LoopMode.one);
+    await _player.play();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -54,25 +66,30 @@ class _MyAudioButtonState extends State<MyAudioButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _playSound,
-      // onPressed: () {},
-      child: Column(
-        children: [
-          Text(_isPlaying ? 'Stop Sound' : 'Play Sound'),
-          Text('Duration: ${_player.duration}'),
-          Slider(
-            value: _volume,
-            onChanged: (value) async {
-              setState(() {
-                _volume = value;
-              });
-              await _player.setVolume(value);
-              print('Volume set to: $value');
-            },
+    return Column(
+      children: [
+        GestureDetector(onTap: setupAudio, child: Text('play Audio')),
+        ElevatedButton(
+          onPressed: _playSound,
+          // onPressed: setupAudio,
+          child: Column(
+            children: [
+              Text(_isPlaying ? 'Stop Sound' : 'Play Sound'),
+              Text('Duration: ${_player.duration}'),
+              Slider(
+                value: _volume,
+                onChanged: (value) async {
+                  setState(() {
+                    _volume = value;
+                  });
+                  await _player.setVolume(value);
+                  print('Volume set to: $value');
+                },
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
