@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import '../services/audio_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,6 +24,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/playground');
               },
             ),
+            MyAudioButton(),
           ],
         ),
       ),
