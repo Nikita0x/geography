@@ -18,7 +18,6 @@ class _FlagsAfricaScreenState extends State<FlagsAfricaScreen> {
 
   Timer? countDownTimer;
   bool _timerPaused = false;
-  final int _remainingPauseTime = 0; // Stores remaining pause duration
 
   String userAnswer = '';
   bool disableButtons = false;
