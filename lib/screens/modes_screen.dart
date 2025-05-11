@@ -12,7 +12,10 @@ class Mode {
 class ModesScreen extends StatelessWidget {
   ModesScreen({super.key});
 
-  List<Mode> modes = [Mode('Europe', '/flags/eu')];
+  List<Mode> modes = [
+    Mode('Europe', '/flags/eu'),
+    Mode('Africa', '/flags/afr'),
+  ];
 
   @override
   Widget build(BuildContext context) {
