@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import '../services/audio_service.dart';
-import 'package:geography/services/audio_service.dart';
-import 'package:universal_io/io.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,67 +9,132 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  // final _audioService = AudioService();
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<AlignmentGeometry>
+  _topAlignmentAnimation; // Changed to AlignmentGeometry
+  late Animation<AlignmentGeometry>
+  _bottomAlignmentAnimation; // Changed to AlignmentGeometry
 
-  // @override
-  // void initState() {
-  //   if (!kIsWeb) {
-  //     _audioService.playBackgroundMusic();
-  //   }
+  @override
+  void initState() {
+    super.initState();
 
-  //   super.initState();
-  // }
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    );
 
-  // @override
-  // void dispose() {
-  //   _audioService.dispose();
-  //   super.dispose();
-  // }
+    // Using TweenSequence for complex animations
+    _topAlignmentAnimation = TweenSequence<AlignmentGeometry>([
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomLeft,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topLeft,
+        ),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+
+    _bottomAlignmentAnimation = TweenSequence<AlignmentGeometry>([
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomLeft,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topLeft,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+        ),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(middle: Text('Guess a Flag')),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // CupertinoButton(
-            //   child: Text('pause music'),
-            //   onPressed: () {
-            //     // _audioService.pauseMusic();
-            //   },
-            // ),
-            // CupertinoButton(
-            //   child: Text('resume music'),
-            //   onPressed: () {
-            //     // _audioService.resumeMusic();
-            //   },
-            // ),
-            // CupertinoButton(
-            //   child: Text('stop music'),
-            //   onPressed: () {
-            //     // _audioService.stop();
-            //   },
-            // ),
-            CupertinoButton(
-              child: const Text("Start Game"),
-              onPressed: () async {
-                Navigator.pushNamed(context, '/modes');
-                // if (!_audioService.isAlreadyPlaying) {
-                //   await _audioService.playBackgroundMusic();
-                // }
-              },
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: const [Colors.red, Colors.yellow],
+                begin: _topAlignmentAnimation.value,
+                end: _bottomAlignmentAnimation.value,
+              ),
             ),
-            CupertinoButton(
-              child: const Text("Playground"),
-              onPressed: () {
-                Navigator.pushNamed(context, '/playground');
-              },
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CupertinoButton(
+                    child: const Text("Start Game"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/modes');
+                    },
+                  ),
+                  const SizedBox(height: 20), // Added spacing
+                  CupertinoButton(
+                    child: const Text("Playground"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/playground');
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
