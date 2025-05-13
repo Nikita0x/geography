@@ -41,6 +41,7 @@ dependencies:
     #TODO: Для того чтобы билдилось на линуксе, нужно установить flutter - не через snap, а в ручную.. но даже так у меня все равно залагивало нативное окно и не работало.... проще работать через chrome всегда....
     # media_kit_libs_linux: 1.2.1
     universal_io: ^2.2.2
+    http: ^1.4.0
 
 dev_dependencies:
     flutter_test:

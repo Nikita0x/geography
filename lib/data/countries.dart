@@ -245,3 +245,110 @@ final List<Country> africanCountries = [
   zambia,
   zimbabwe,
 ];
+
+// Asian countries
+
+const afghanistan = Country(name: 'Afghanistan', code: 'af', emoji: '🇦🇫');
+const armenia = Country(name: 'Armenia', code: 'am', emoji: '🇦🇲');
+const azerbaijan = Country(name: 'Azerbaijan', code: 'az', emoji: '🇦🇿');
+const bahrain = Country(name: 'Bahrain', code: 'bh', emoji: '🇧🇭');
+const bangladesh = Country(name: 'Bangladesh', code: 'bd', emoji: '🇧🇩');
+const bhutan = Country(name: 'Bhutan', code: 'bt', emoji: '🇧🇹');
+const brunei = Country(name: 'Brunei', code: 'bn', emoji: '🇧🇳');
+const cambodia = Country(name: 'Cambodia', code: 'kh', emoji: '🇰🇭');
+const china = Country(name: 'China', code: 'cn', emoji: '🇨🇳');
+const georgia = Country(name: 'Georgia', code: 'ge', emoji: '🇬🇪');
+const india = Country(name: 'India', code: 'in', emoji: '🇮🇳');
+const indonesia = Country(name: 'Indonesia', code: 'id', emoji: '🇮🇩');
+const iran = Country(name: 'Iran', code: 'ir', emoji: '🇮🇷');
+const iraq = Country(name: 'Iraq', code: 'iq', emoji: '🇮🇶');
+const israel = Country(name: 'Israel', code: 'il', emoji: '🇮🇱');
+const japan = Country(name: 'Japan', code: 'jp', emoji: '🇯🇵');
+const jordan = Country(name: 'Jordan', code: 'jo', emoji: '🇯🇴');
+const kazakhstan = Country(name: 'Kazakhstan', code: 'kz', emoji: '🇰🇿');
+const kuwait = Country(name: 'Kuwait', code: 'kw', emoji: '🇰🇼');
+const kyrgyzstan = Country(name: 'Kyrgyzstan', code: 'kg', emoji: '🇰🇬');
+const laos = Country(name: 'Laos', code: 'la', emoji: '🇱🇦');
+const lebanon = Country(name: 'Lebanon', code: 'lb', emoji: '🇱🇧');
+const malaysia = Country(name: 'Malaysia', code: 'my', emoji: '🇲🇾');
+const maldives = Country(name: 'Maldives', code: 'mv', emoji: '🇲🇻');
+const mongolia = Country(name: 'Mongolia', code: 'mn', emoji: '🇲🇳');
+const myanmar = Country(name: 'Myanmar', code: 'mm', emoji: '🇲🇲');
+const nepal = Country(name: 'Nepal', code: 'np', emoji: '🇳🇵');
+const northKorea = Country(name: 'North Korea', code: 'kp', emoji: '🇰🇵');
+const oman = Country(name: 'Oman', code: 'om', emoji: '🇴🇲');
+const pakistan = Country(name: 'Pakistan', code: 'pk', emoji: '🇵🇰');
+const palestine = Country(name: 'Palestine', code: 'ps', emoji: '🇵🇸');
+const philippines = Country(name: 'Philippines', code: 'ph', emoji: '🇵🇭');
+const qatar = Country(name: 'Qatar', code: 'qa', emoji: '🇶🇦');
+const saudiArabia = Country(name: 'Saudi Arabia', code: 'sa', emoji: '🇸🇦');
+const singapore = Country(name: 'Singapore', code: 'sg', emoji: '🇸🇬');
+const southKorea = Country(name: 'South Korea', code: 'kr', emoji: '🇰🇷');
+const sriLanka = Country(name: 'Sri Lanka', code: 'lk', emoji: '🇱🇰');
+const syria = Country(name: 'Syria', code: 'sy', emoji: '🇸🇾');
+const taiwan = Country(name: 'Taiwan', code: 'tw', emoji: '🇹🇼');
+const tajikistan = Country(name: 'Tajikistan', code: 'tj', emoji: '🇹🇯');
+const thailand = Country(name: 'Thailand', code: 'th', emoji: '🇹🇭');
+const timorLeste = Country(name: 'Timor-Leste', code: 'tl', emoji: '🇹🇱');
+const turkey = Country(name: 'Turkey', code: 'tr', emoji: '🇹🇷');
+const turkmenistan = Country(name: 'Turkmenistan', code: 'tm', emoji: '🇹🇲');
+const unitedArabEmirates = Country(
+  name: 'United Arab Emirates',
+  code: 'ae',
+  emoji: '🇦🇪',
+);
+const uzbekistan = Country(name: 'Uzbekistan', code: 'uz', emoji: '🇺🇿');
+const vietnam = Country(name: 'Vietnam', code: 'vn', emoji: '🇻🇳');
+const yemen = Country(name: 'Yemen', code: 'ye', emoji: '🇾🇪');
+
+List<Country> asianCountries = [
+  afghanistan,
+  armenia,
+  azerbaijan,
+  bahrain,
+  bangladesh,
+  bhutan,
+  brunei,
+  cambodia,
+  china,
+  cyprus,
+  georgia,
+  india,
+  indonesia,
+  iran,
+  iraq,
+  israel,
+  japan,
+  jordan,
+  kazakhstan,
+  kuwait,
+  kyrgyzstan,
+  laos,
+  lebanon,
+  malaysia,
+  maldives,
+  mongolia,
+  myanmar,
+  nepal,
+  northKorea,
+  oman,
+  pakistan,
+  palestine,
+  philippines,
+  qatar,
+  saudiArabia,
+  singapore,
+  southKorea,
+  sriLanka,
+  syria,
+  taiwan,
+  tajikistan,
+  thailand,
+  timorLeste,
+  turkey,
+  turkmenistan,
+  unitedArabEmirates,
+  uzbekistan,
+  vietnam,
+  yemen,
+];

@@ -15,6 +15,7 @@ class ModesScreen extends StatelessWidget {
   List<Mode> modes = [
     Mode('Europe', '/flags/eu'),
     Mode('Africa', '/flags/afr'),
+    Mode('Asia', '/flags/asia'),
   ];
 
   @override
