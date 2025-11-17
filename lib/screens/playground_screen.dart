@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:geography/stores/app_store.dart';
+import 'package:signals/signals_flutter.dart';
 
 class PlaygroundScreen extends StatefulWidget {
   const PlaygroundScreen({super.key});
@@ -18,18 +20,32 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.red, Colors.yellow, Colors.blue, Colors.green],
+              colors: [Colors.black, Colors.yellow, Colors.blue, Colors.green],
             ),
           ),
           child: Stack(
             children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: GestureDetector(
+                  child: Watch(
+                    (context) => Text(
+                      "click me. Current counter: ${appStore.counter.value}",
+                    ),
+                  ),
+                  onTap: () {
+                    appStore.counter.value++;
+                    print("${appStore.counter.value}");
+                  },
+                ),
+              ),
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(color: Colors.black, width: 50, height: 50),
               ),
               Align(
                 alignment: Alignment(-0.8, -0.9),
-                child: Container(color: Colors.red, width: 50, height: 50),
+                child: Container(color: Colors.green, width: 50, height: 50),
               ),
               Align(
                 alignment: Alignment(-0.6, -0.8),
