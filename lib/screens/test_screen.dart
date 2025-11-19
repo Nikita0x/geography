@@ -22,7 +22,7 @@ class _TestScreenState extends State<TestScreen> {
           color: Colors.green,
           child: Column(
             children: [
-              Text('Hello Cupertino!'),
+              Text('Hello Cupertino! 1'),
               CupertinoButton(
                 child: Text('Закрыть'),
                 onPressed: () => Navigator.pop(context),
