@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geography/main.dart' show Routes;
+import 'package:geography/screens/paywall_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,29 +14,46 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(middle: Text('Guess a Flag')),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+      // navigationBar: const CupertinoNavigationBar(middle: Text('Guess a Flag')),
+      child: SafeArea(
+        child: Stack(
           children: [
-            CupertinoButton(
-              child: const Text("Start Game"),
-              onPressed: () {
-                Navigator.pushNamed(context, '/modes');
-              },
-            ),
-            const SizedBox(height: 20),
-            CupertinoButton(
-              child: const Text("Playground"),
-              onPressed: () {
-                Navigator.pushNamed(context, '/playground');
-              },
-            ),
-            CupertinoButton(
-              child: const Text("Test Button"),
-              onPressed: () {
-                Navigator.pushNamed(context, '/test');
-              },
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CupertinoButton(
+                    color: Colors.blue[900],
+                    child: const Text("Start Game"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.modes);
+                    },
+                  ),
+                  CupertinoButton(
+                    color: Colors.red[900],
+                    child: const Text("Playground"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.playground);
+                    },
+                  ),
+                  CupertinoButton(
+                    color: Colors.green[900],
+                    child: const Text("Test Button"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.test);
+                    },
+                  ),
+                  CupertinoButton(
+                    color: Colors.purple[900],
+                    child: const Text("Open Paywall"),
+                    onPressed: () {
+                      Navigator.of(context).push(PaywallRoute());
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

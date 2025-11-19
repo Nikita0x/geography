@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:geography/main.dart' show Routes;
 
 class Mode {
   final String name;
@@ -13,9 +14,9 @@ class ModesScreen extends StatelessWidget {
   ModesScreen({super.key});
 
   List<Mode> modes = [
-    Mode('Europe', '/flags/eu'),
-    Mode('Africa', '/flags/afr'),
-    Mode('Asia', '/flags/asia'),
+    Mode('Europe', Routes.europeanFlags),
+    Mode('Africa', Routes.africanFlags),
+    Mode('Asia', Routes.asianFlags),
   ];
 
   @override
