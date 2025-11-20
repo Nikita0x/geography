@@ -18,6 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
         child: Stack(
           children: [
+            Container(
+              color: Colors.red,
+              height: double.infinity,
+              width: double.infinity,
+            ),
             Positioned(
               bottom: 0,
               right: 0,

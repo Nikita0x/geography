@@ -13,6 +13,7 @@ import 'screens/paywall_screen.dart';
 
 class Routes {
   static const String initialRoute = "/initial";
+  static const String home = "/";
   static const String modes = '/modes';
   static const String europeanFlags = '/flags/eu';
   static const String africanFlags = '/flags/afr';
@@ -22,15 +23,17 @@ class Routes {
   static const String paywall = '/paywall';
 }
 
+bool isDev = true;
+
 void main() {
   runApp(
     DevicePreview(
       builder:
           (context) => CupertinoApp(
             useInheritedMediaQuery: true, //required by DevicePreview
-            initialRoute: Routes.initialRoute,
-            home: HomeScreen(),
+            initialRoute: isDev ? Routes.home : Routes.initialRoute,
             routes: {
+              Routes.home: (context) => HomeScreen(),
               Routes.europeanFlags: (context) => FlagsEuropeScreen(),
               Routes.africanFlags: (context) => FlagsAfricaScreen(),
               Routes.asianFlags: (context) => FlagsAsiaScreen(),
