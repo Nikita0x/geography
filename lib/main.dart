@@ -10,6 +10,8 @@ import 'screens/flags_asia_screen.dart';
 import 'screens/playground_screen.dart';
 import 'screens/test_screen.dart';
 import 'screens/paywall_screen.dart';
+import 'screens/hearts_screen.dart';
+import 'screens/modes/flags_guess_name_from_flags_screen.dart';
 
 class Routes {
   static const String initialRoute = "/initial";
@@ -21,6 +23,8 @@ class Routes {
   static const String playground = '/playground';
   static const String test = '/test';
   static const String paywall = '/paywall';
+  static const String hearts = '/hearts';
+  static const String flagsGuessNameFromFlags = '/flags/guess-name-from-flags';
 }
 
 bool isDev = true;
@@ -41,6 +45,9 @@ void main() {
               Routes.playground: (context) => PlaygroundScreen(),
               Routes.test: (context) => TestScreen(),
               Routes.paywall: (context) => PaywallScreen(),
+              Routes.hearts: (context) => HeartsScreen(),
+              Routes.flagsGuessNameFromFlags:
+                  (context) => FlagsGuessNameFromFlagsScreen(),
               Routes.initialRoute: (context) => InitialScreen(),
             },
           ),

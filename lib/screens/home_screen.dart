@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:geography/main.dart' show Routes;
 import 'package:geography/screens/paywall_screen.dart';
 
+class Mode {
+  final String name;
+  final String route;
+
+  Mode(this.name, this.route);
+}
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -11,6 +18,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Mode> modes = [
+    Mode('Guess Flag (Europe)', Routes.europeanFlags),
+    Mode('Guess Flag (Europe)', Routes.europeanFlags),
+    Mode('Africa', Routes.africanFlags),
+    Mode('Asia', Routes.asianFlags),
+    Mode('Guess Name from Flags', Routes.flagsGuessNameFromFlags),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -19,9 +34,39 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             Container(
-              color: Colors.red,
+              color: Colors.green[300],
               height: double.infinity,
               width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...modes.map((item) {
+                    return Card(
+                      elevation: 5,
+                      child: CupertinoButton(
+                        child: Text(item.name),
+                        onPressed:
+                            () => Navigator.pushNamed(context, item.route),
+                      ),
+                    );
+                  }),
+                  Card(
+                    elevation: 5,
+                    child: CupertinoButton(
+                      child: Text("Hearts"),
+                      onPressed:
+                          () => Navigator.pushNamed(context, Routes.hearts),
+                    ),
+                  ),
+                  CupertinoTextField(
+                    placeholder: "Hello",
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Positioned(
               bottom: 0,
