@@ -12,6 +12,8 @@ import 'screens/test_screen.dart';
 import 'screens/paywall_screen.dart';
 import 'screens/hearts_screen.dart';
 import 'screens/modes/flags_guess_name_from_flags_screen.dart';
+import 'screens/modes/capitals_guess_country_from_capital_screen.dart';
+import 'screens/modes/countries_guess_capital_from_country_screen.dart';
 
 class Routes {
   static const String initialRoute = "/initial";
@@ -25,6 +27,10 @@ class Routes {
   static const String paywall = '/paywall';
   static const String hearts = '/hearts';
   static const String flagsGuessNameFromFlags = '/flags/guess-name-from-flags';
+  static const String capitalsGuessCountryFromCapital =
+      '/capitals/guess-country-from-capital';
+  static const String countriesGuessCapitalFromCountry =
+      '/countries/guess-capital-from-country';
 }
 
 bool isDev = true;
@@ -48,6 +54,10 @@ void main() {
               Routes.hearts: (context) => HeartsScreen(),
               Routes.flagsGuessNameFromFlags:
                   (context) => FlagsGuessNameFromFlagsScreen(),
+              Routes.capitalsGuessCountryFromCapital:
+                  (context) => CapitalsGuessCountryFromCapitalScreen(),
+              Routes.countriesGuessCapitalFromCountry:
+                  (context) => CountriesGuessCapitalFromCountryScreen(),
               Routes.initialRoute: (context) => InitialScreen(),
             },
           ),

@@ -24,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Mode('Africa', Routes.africanFlags),
     Mode('Asia', Routes.asianFlags),
     Mode('Guess Name from Flags', Routes.flagsGuessNameFromFlags),
+    Mode('Guess Country from Capital', Routes.capitalsGuessCountryFromCapital),
+    Mode('Guess Capital from Country', Routes.countriesGuessCapitalFromCountry),
   ];
 
   @override
