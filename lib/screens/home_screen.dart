@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geography/main.dart' show Routes;
-import 'package:geography/screens/paywall_screen.dart';
 
 class AnimatedHomeBackground extends StatefulWidget {
   const AnimatedHomeBackground({super.key});
@@ -176,99 +175,47 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      // navigationBar: const CupertinoNavigationBar(middle: Text('Guess a Flag')),
       backgroundColor: Colors.black,
       child: Stack(
         children: [
           const Positioned.fill(child: AnimatedHomeBackground()),
           SafeArea(
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ...modes.map((item) {
-                        return Card(
-                          elevation: 0,
-                          color: Colors.white.withOpacity(0.05),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ...modes.map((item) {
+                    return Card(
+                      elevation: 0,
+                      color: Colors.white.withOpacity(0.05),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: CupertinoButton(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 12,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            item.name,
+                            style: const TextStyle(color: Colors.white),
                           ),
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: CupertinoButton(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 16,
-                              horizontal: 12,
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                item.name,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            onPressed:
-                                () => Navigator.pushNamed(context, item.route),
-                          ),
-                        );
-                      }),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 16,
-                  left: 16,
-                  right: 16,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // CupertinoButton(
-                      //   color: Colors.blue[900],
-                      //   borderRadius: BorderRadius.circular(16),
-                      //   padding: const EdgeInsets.symmetric(vertical: 16),
-                      //   child: const Text("Start Game"),
-                      //   onPressed: () {
-                      //     Navigator.pushNamed(context, Routes.modes);
-                      //   },
-                      // ),
-                      const SizedBox(height: 8),
-                      CupertinoButton(
-                        color: Colors.red[900],
-                        borderRadius: BorderRadius.circular(16),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: const Text("Playground"),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.playground);
-                        },
+                        ),
+                        onPressed:
+                            () => Navigator.of(
+                              context,
+                              rootNavigator: true,
+                            ).pushNamed(item.route),
                       ),
-                      const SizedBox(height: 8),
-                      CupertinoButton(
-                        color: Colors.green[900],
-                        borderRadius: BorderRadius.circular(16),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: const Text("Test Button"),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.test);
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      CupertinoButton(
-                        color: Colors.purple[900],
-                        borderRadius: BorderRadius.circular(16),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: const Text("Open Paywall"),
-                        onPressed: () {
-                          Navigator.of(context).push(PaywallRoute());
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                    );
+                  }),
+                ],
+              ),
             ),
           ),
         ],

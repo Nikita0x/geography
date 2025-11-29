@@ -36,7 +36,7 @@ class PaywallScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'Get unlimited quizzes, offline study decks, and early access to new flag packs.',
+                'Remove ads, unlock custom quiz sets, and help support ongoing development.',
                 style: textTheme.textStyle.copyWith(
                   color: Colors.white70,
                   fontSize: 16,
@@ -44,19 +44,21 @@ class PaywallScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               _FeatureTile(
-                icon: CupertinoIcons.globe,
-                title: 'All flag packs',
-                subtitle: 'Every continent, always up to date.',
+                icon: CupertinoIcons.nosign,
+                title: 'No ads',
+                subtitle: 'Enjoy a clean experience with zero interruptions.',
               ),
               _FeatureTile(
-                icon: CupertinoIcons.lightbulb_fill,
-                title: 'Smart hints',
-                subtitle: 'Contextual clues that adapt as you learn.',
+                icon: CupertinoIcons.slider_horizontal_3,
+                title: 'Custom quizzes',
+                subtitle:
+                    'Build your own quiz sets from any countries and flags.',
               ),
               _FeatureTile(
-                icon: CupertinoIcons.rocket_fill,
-                title: 'Challenge mode',
-                subtitle: 'Weekly tournaments with friends.',
+                icon: CupertinoIcons.heart_fill,
+                title: 'Support the developer',
+                subtitle:
+                    'Your support helps keep the app improving with new modes and updates.',
               ),
               const Spacer(),
               Container(

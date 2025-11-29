@@ -39,7 +39,7 @@ Future<void> main() async {
             useInheritedMediaQuery: true, //required by DevicePreview
             initialRoute: isDev ? Routes.home : Routes.initialRoute,
             routes: {
-              Routes.home: (context) => HomeScreen(),
+              Routes.home: (context) => const _RootTabScaffold(),
               // Routes.modes: (context) => ModesScreen(),
               Routes.playground: (context) => PlaygroundScreen(),
               Routes.test: (context) => TestScreen(),
@@ -50,9 +50,82 @@ Future<void> main() async {
                   (context) => CapitalsGuessCountryFromCapitalScreen(),
               Routes.countriesGuessCapitalFromCountry:
                   (context) => CountriesGuessCapitalFromCountryScreen(),
-              Routes.initialRoute: (context) => InitialScreen(),
+              Routes.initialRoute: (context) => const InitialScreen(),
             },
           ),
     ),
   );
+}
+
+class _RootTabScaffold extends StatefulWidget {
+  const _RootTabScaffold();
+
+  @override
+  State<_RootTabScaffold> createState() => _RootTabScaffoldState();
+}
+
+class _RootTabScaffoldState extends State<_RootTabScaffold> {
+  late final CupertinoTabController _controller;
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = CupertinoTabController(initialIndex: _currentIndex);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+      controller: _controller,
+      tabBar: CupertinoTabBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          if (index == 3) {
+            Navigator.of(context).push(PaywallRoute());
+            // Не переключаем таб, остаёмся на предыдущем
+            _controller.index = _currentIndex;
+            return;
+          }
+
+          if (index != _currentIndex) {
+            setState(() {
+              _currentIndex = index;
+              _controller.index = index;
+            });
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.play_arrow_solid),
+            label: 'Playground',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.lab_flask),
+            label: 'Test',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.lock),
+            label: 'Premium',
+          ),
+        ],
+      ),
+      tabBuilder: (BuildContext context, int index) {
+        if (index == 0) {
+          return CupertinoTabView(builder: (context) => const HomeScreen());
+        }
+
+        if (index == 1) {
+          return CupertinoTabView(builder: (context) => PlaygroundScreen());
+        }
+
+        // index == 2 или любой другой рабочий индекс табов
+        return CupertinoTabView(builder: (context) => TestScreen());
+      },
+    );
+  }
 }
