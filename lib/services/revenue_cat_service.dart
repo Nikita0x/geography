@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 Future<void> initializeRevenueCat() async {
-  if (kIsWeb) {
-    print('‼️RevenueCat initialization skipped on web');
+  if (kIsWeb || Platform.isLinux) {
+    print('‼️RevenueCat initialization skipped on web or linux');
     return;
   }
   // Platform-specific API keys
