@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:device_preview/device_preview.dart';
 
+import 'services/revenue_cat_service.dart';
 import 'package:geography/screens/initial_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/modes_screen.dart';
@@ -35,7 +36,10 @@ class Routes {
 
 bool isDev = true;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeRevenueCat();
+
   runApp(
     DevicePreview(
       builder:
