@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geography/components/countries_results_overlays.dart';
 import 'package:geography/data/countries.dart';
 import 'package:signals/signals_flutter.dart';
 
@@ -31,6 +32,7 @@ class _CountriesGuessCapitalFromCountryScreenState
   late final roundLocked = createSignal<bool>(false);
   late final answeredCorrect = createSignal<int>(0);
   late final gameCompleted = createSignal<bool>(false);
+  late final correctlyGuessedCountries = createSignal<Set<String>>(<String>{});
 
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _CountriesGuessCapitalFromCountryScreenState
     answeredCorrect.value = 0;
     gameCompleted.value = false;
     hearts.value = initialHearts;
+    correctlyGuessedCountries.value = <String>{};
     _generateRound();
   }
 
@@ -60,7 +63,7 @@ class _CountriesGuessCapitalFromCountryScreenState
     final random = Random();
     final shuffled = List<Country>.from(activePool.value)..shuffle(random);
 
-    final newOptions = shuffled.take(4).toList();
+    final List<Country> newOptions = shuffled.take(4).toList();
     options.value = newOptions;
     correctCountry.value = newOptions[random.nextInt(newOptions.length)];
     wrongAnswers.value = <String>{};
@@ -77,7 +80,29 @@ class _CountriesGuessCapitalFromCountryScreenState
     }
 
     if (selected == correctCountry.value) {
-      final nextCount = answeredCorrect.value + 1;
+      final currentCorrect = correctlyGuessedCountries.value;
+      final bool isNewCorrect =
+          !currentCorrect.contains(correctCountry.value.code);
+
+      if (isNewCorrect) {
+        // Удаляем угаданную страну из пула, чтобы её флаг больше не выпадал
+        final List<Country> currentPool = activePool.value;
+        activePool.value =
+            currentPool
+                .where(
+                  (Country country) =>
+                      country.code != correctCountry.value.code,
+                )
+                .toList();
+
+        correctlyGuessedCountries.value = {
+          ...currentCorrect,
+          correctCountry.value.code,
+        };
+        answeredCorrect.value = correctlyGuessedCountries.value.length;
+      }
+
+      final nextCount = answeredCorrect.value;
 
       if (nextCount >= totalEuropeanCountries) {
         answeredCorrect.value = totalEuropeanCountries;
@@ -279,37 +304,14 @@ class _CountriesGuessCapitalFromCountryScreenState
                 return const SizedBox.shrink();
               }
 
-              return Positioned.fill(
-                child: Container(
-                  color: Colors.black54,
-                  child: Center(
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 32),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              'Game Over',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            const Text('Try again?'),
-                            const SizedBox(height: 16),
-                            CupertinoButton.filled(
-                              onPressed: _startNewGame,
-                              child: const Text('Play again'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              final pool = activePool.value;
+              final guessedCodes = correctlyGuessedCountries.value;
+
+              return CountriesGameOverOverlay(
+                pool: pool,
+                guessedCodes: guessedCodes,
+                totalCountries: totalEuropeanCountries,
+                onPlayAgain: _startNewGame,
               );
             }),
             Watch((context) {
@@ -317,42 +319,14 @@ class _CountriesGuessCapitalFromCountryScreenState
                 return const SizedBox.shrink();
               }
 
-              return Positioned.fill(
-                child: Container(
-                  color: Colors.black54,
-                  child: Center(
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 32),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              'Well done!',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            const Text('You completed all European capitals.'),
-                            const SizedBox(height: 16),
-                            CupertinoButton.filled(
-                              child: const Text('Play again'),
-                              onPressed: () {
-                                hearts.value = initialHearts;
-                                answeredCorrect.value = 0;
-                                gameCompleted.value = false;
-                                _generateRound();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              final pool = activePool.value;
+              final guessedCodes = correctlyGuessedCountries.value;
+
+              return CountriesWellDoneOverlay(
+                pool: pool,
+                guessedCodes: guessedCodes,
+                totalCountries: totalEuropeanCountries,
+                onPlayAgain: _startNewGame,
               );
             }),
           ],

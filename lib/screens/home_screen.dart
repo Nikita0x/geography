@@ -168,10 +168,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Mode> modes = [
-    Mode('Guess Flag (Europe)', Routes.europeanFlags),
-    Mode('Guess Flag (Europe)', Routes.europeanFlags),
-    Mode('Africa', Routes.africanFlags),
-    Mode('Asia', Routes.asianFlags),
     Mode('Guess Name from Flags', Routes.flagsGuessNameFromFlags),
     Mode('Guess Country from Capital', Routes.capitalsGuessCountryFromCapital),
     Mode('Guess Capital from Country', Routes.countriesGuessCapitalFromCountry),
@@ -219,30 +215,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       }),
-                      Card(
-                        elevation: 0,
-                        color: Colors.white.withOpacity(0.05),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        margin: const EdgeInsets.only(bottom: 12),
-                        child: CupertinoButton(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 16,
-                            horizontal: 12,
-                          ),
-                          borderRadius: BorderRadius.circular(16),
-                          child: const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Hearts",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          onPressed:
-                              () => Navigator.pushNamed(context, Routes.hearts),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -254,15 +226,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CupertinoButton(
-                        color: Colors.blue[900],
-                        borderRadius: BorderRadius.circular(16),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: const Text("Start Game"),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.modes);
-                        },
-                      ),
+                      // CupertinoButton(
+                      //   color: Colors.blue[900],
+                      //   borderRadius: BorderRadius.circular(16),
+                      //   padding: const EdgeInsets.symmetric(vertical: 16),
+                      //   child: const Text("Start Game"),
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(context, Routes.modes);
+                      //   },
+                      // ),
                       const SizedBox(height: 8),
                       CupertinoButton(
                         color: Colors.red[900],
