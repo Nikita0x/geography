@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geography/data/countries.dart';
+import 'package:geography/models/country.dart';
 
 class CountriesGameOverOverlay extends StatelessWidget {
   const CountriesGameOverOverlay({

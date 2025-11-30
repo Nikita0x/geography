@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geography/data/countries.dart';
+import 'package:geography/models/country.dart';
 import 'package:signals/signals_flutter.dart';
 
 class CapitalsGuessCountryFromCapitalScreen extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:geography/data/countries.dart';
+import 'package:geography/models/country.dart';
 
 class QuizRound {
   final Country correctCountry;

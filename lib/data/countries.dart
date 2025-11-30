@@ -1,17 +1,4 @@
-class Country {
-  final String name;
-  final String code; // ISO 3166-1
-  final String emoji; // Unicode flag emoji
-  final String capital;
-  final String svgPath;
-
-  const Country({
-    required this.name,
-    required this.code,
-    required this.emoji,
-    required this.capital,
-  }) : svgPath = 'assets/flags/$code.svg';
-}
+import 'package:geography/models/country.dart';
 
 // TODO: add more countries
 var albania = Country(

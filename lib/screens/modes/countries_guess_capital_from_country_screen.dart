@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geography/components/countries_results_overlays.dart';
 import 'package:geography/data/countries.dart';
+import 'package:geography/models/country.dart';
 import 'package:signals/signals_flutter.dart';
 
 class CountriesGuessCapitalFromCountryScreen extends StatefulWidget {
