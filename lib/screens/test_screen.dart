@@ -1,24 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geography/components/background.dart';
 
 class TestScreen extends StatelessWidget {
   const TestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(middle: Text('Hero Demo')),
-      child: SafeArea(
-        child: ListView.separated(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
-          itemBuilder: (context, index) {
-            final destination = _heroDestinations[index];
-            return _DestinationCard(destination: destination);
-          },
-          separatorBuilder: (_, __) => const SizedBox(height: 20),
-          itemCount: _heroDestinations.length,
+    return Stack(
+      children: [
+        const Positioned.fill(child: TestBackground()),
+        SafeArea(
+          child: ListView.separated(
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
+            itemBuilder: (context, index) {
+              final destination = _heroDestinations[index];
+              return _DestinationCard(destination: destination);
+            },
+            separatorBuilder: (_, __) => const SizedBox(height: 20),
+            itemCount: _heroDestinations.length,
+          ),
         ),
-      ),
+      ],
     );
   }
 }
