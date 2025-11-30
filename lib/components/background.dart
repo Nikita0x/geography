@@ -12,7 +12,7 @@ class HomeBackground extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF26D0CE), Color(0xFF1A2980)],
+              colors: [Color.fromARGB(255, 16, 110, 108), Color(0xFF1A2980)],
             ),
           ),
         ),
@@ -39,7 +39,7 @@ class HomeBackground extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 170,
+          top: 370,
           left: 96,
           child: Opacity(
             opacity: 0.05,
@@ -65,8 +65,8 @@ class HomeBackground extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 230,
-          right: 120,
+          top: 290,
+          right: 50,
           child: Opacity(
             opacity: 0.04,
             child: Transform.rotate(
@@ -76,12 +76,12 @@ class HomeBackground extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 36,
-          left: 110,
+          top: 150,
+          left: 15,
           child: Opacity(
             opacity: 0.05,
             child: Transform.rotate(
-              angle: -0.12,
+              angle: -0.50,
               child: const Icon(
                 Icons.location_on,
                 size: 40,
@@ -117,14 +117,14 @@ class PlaygroundBackground extends StatelessWidget {
           child: Opacity(
             opacity: 0.07,
             child: Transform.rotate(
-              angle: -0.3,
-              child: const Icon(Icons.public, size: 60, color: Colors.white),
+              angle: -0.6,
+              child: const Icon(Icons.public, size: 90, color: Colors.white),
             ),
           ),
         ),
         Positioned(
-          bottom: 60,
-          right: 30,
+          top: 280,
+          right: 0,
           child: Opacity(
             opacity: 0.06,
             child: Transform.rotate(

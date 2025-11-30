@@ -4,26 +4,16 @@ import 'package:device_preview/device_preview.dart';
 import 'services/revenue_cat_service.dart';
 import 'package:geography/screens/initial_screen.dart';
 import 'screens/home_screen.dart';
-// import 'screens/modes_screen.dart';
 import 'screens/playground_screen.dart';
 import 'screens/test_screen.dart';
 import 'screens/paywall_screen.dart';
-import 'screens/modes/flags_guess_name_from_flags_screen.dart';
-import 'screens/modes/capitals_guess_country_from_capital_screen.dart';
-import 'screens/modes/countries_guess_capital_from_country_screen.dart';
 
 class Routes {
   static const String initialRoute = "/initial";
   static const String home = "/";
-  static const String modes = '/modes';
   static const String playground = '/playground';
   static const String test = '/test';
   static const String paywall = '/paywall';
-  static const String flagsGuessNameFromFlags = '/flags/guess-name-from-flags';
-  static const String capitalsGuessCountryFromCapital =
-      '/capitals/guess-country-from-capital';
-  static const String countriesGuessCapitalFromCountry =
-      '/countries/guess-capital-from-country';
 }
 
 bool isDev = true;
@@ -40,16 +30,9 @@ Future<void> main() async {
             initialRoute: isDev ? Routes.home : Routes.initialRoute,
             routes: {
               Routes.home: (context) => const _RootTabScaffold(),
-              // Routes.modes: (context) => ModesScreen(),
               Routes.playground: (context) => PlaygroundScreen(),
               Routes.test: (context) => TestScreen(),
               Routes.paywall: (context) => PaywallScreen(),
-              Routes.flagsGuessNameFromFlags:
-                  (context) => FlagsGuessNameFromFlagsScreen(),
-              Routes.capitalsGuessCountryFromCapital:
-                  (context) => CapitalsGuessCountryFromCapitalScreen(),
-              Routes.countriesGuessCapitalFromCountry:
-                  (context) => CountriesGuessCapitalFromCountryScreen(),
               Routes.initialRoute: (context) => const InitialScreen(),
             },
           ),
@@ -109,7 +92,7 @@ class _RootTabScaffoldState extends State<_RootTabScaffold> {
             label: 'Test',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.lock),
+            icon: Icon(CupertinoIcons.star_fill),
             label: 'Premium',
           ),
         ],

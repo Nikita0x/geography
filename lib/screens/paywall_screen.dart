@@ -134,7 +134,7 @@ class PaywallScreen extends StatelessWidget {
           const Positioned.fill(child: PaywallAnimatedBackground()),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -153,84 +153,96 @@ class PaywallScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    'Unlock Geography Pro',
-                    style: textTheme.navLargeTitleTextStyle.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Remove ads, unlock custom quiz sets, and help support ongoing development.',
-                    style: textTheme.textStyle.copyWith(
-                      color: Colors.white70,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  _FeatureTile(
-                    icon: CupertinoIcons.nosign,
-                    title: 'No ads',
-                    subtitle:
-                        'Enjoy a clean experience with zero interruptions.',
-                  ),
-                  _FeatureTile(
-                    icon: CupertinoIcons.slider_horizontal_3,
-                    title: 'Custom quizzes',
-                    subtitle:
-                        'Build your own quiz sets from any countries and flags.',
-                  ),
-                  _FeatureTile(
-                    icon: CupertinoIcons.heart_fill,
-                    title: 'Support the developer',
-                    subtitle:
-                        'Your support helps keep the app improving with new modes and updates.',
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 24,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF5F5CFF), Color(0xFF00C2FF)],
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Start your 7-day free trial',
-                          style: textTheme.navTitleTextStyle.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'Unlock Geography Pro',
+                            style: textTheme.navLargeTitleTextStyle.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$4.99 / month after trial',
-                          style: textTheme.tabLabelTextStyle.copyWith(
-                            color: Colors.white70,
+                          const SizedBox(height: 12),
+                          Text(
+                            'Remove ads, unlock custom quiz sets, and help support ongoing development.',
+                            style: textTheme.textStyle.copyWith(
+                              color: Colors.white70,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        CupertinoButton.filled(
-                          borderRadius: BorderRadius.circular(16),
-                          onPressed: () {},
-                          child: const Text('Continue'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Center(
-                    child: Text(
-                      'Restore purchases',
-                      style: textTheme.tabLabelTextStyle.copyWith(
-                        color: Colors.white54,
+                          const SizedBox(height: 24),
+                          _FeatureTile(
+                            icon: CupertinoIcons.nosign,
+                            title: 'No ads',
+                            subtitle:
+                                'Enjoy a clean experience with zero interruptions.',
+                          ),
+                          _FeatureTile(
+                            icon: CupertinoIcons.slider_horizontal_3,
+                            title: 'Custom quizzes',
+                            subtitle:
+                                'Build your own quiz sets from any countries and flags.',
+                          ),
+                          _FeatureTile(
+                            icon: CupertinoIcons.heart_fill,
+                            title: 'Support the developer',
+                            subtitle:
+                                'Your support helps keep the app improving with new modes and updates.',
+                          ),
+                          const SizedBox(height: 24),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF5F5CFF), Color(0xFF00C2FF)],
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Start your 7-day free trial',
+                                  style: textTheme.navTitleTextStyle.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  '\$4.99 / month after trial',
+                                  style: textTheme.tabLabelTextStyle.copyWith(
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: CupertinoButton.filled(
+                                    borderRadius: BorderRadius.circular(16),
+                                    onPressed: () {},
+                                    child: const Text('Continue'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: Text(
+                              'Restore purchases',
+                              style: textTheme.tabLabelTextStyle.copyWith(
+                                color: Colors.white54,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
